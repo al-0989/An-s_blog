@@ -1,4 +1,4 @@
-class HomesController < ApplicationController
+class HomeController < ApplicationController
 
   # This controller will handle the homes and static pages
   def index

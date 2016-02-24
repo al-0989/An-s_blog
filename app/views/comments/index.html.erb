@@ -1,0 +1,9 @@
+<h1>View All Comments <%= @comments.count %></h1>
+
+<%# Use the following code to create links to each individual blog post %>
+<% @comments.each do |comment| %>
+  <%# link_to is a rails method that takes in 4 parameters. The first
+      two being display and path to direct to.%>
+  <%= link_to comment.body, comment_path(comment)%>
+  <hr>
+<% end %>

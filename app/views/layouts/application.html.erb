@@ -1,18 +1,110 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Blog</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Blog</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <style>
+    .btn-group{
+      padding-top: 10px;
+    }
 
-  <%= link_to "Home", index_path %> |
-  <%= link_to "About Me", about_path %> |
-  <hr>
+    .dropdown{
+      padding: 15px 30px 0px 20px;
+    }
 
-<%= yield %>
+    .navbar-brand {
 
-</body>
+      padding-left: 40px;
+      font-size: 25px;
+      color: black !important;
+    }
+
+    body {
+      margin-top: 50px;
+    }
+
+    .navbar-custom {
+        background-color: rgba(10, 60, 106, 0.79);
+        border-color: #E7E7E7;
+        border-width: 4px;
+    }
+
+  .navbar-custom .navbar-nav > li  {
+      color:#fff;
+  }
+    </style>
+  </head>
+  <body>
+
+  <!-- Nav Bar  -->
+  <nav class="navbar navbar-custom navbar-fixed-top">
+    <div class="container" style="padding: 10px">
+      <!-- This is for the lefthand side of the nav bar -->
+      <a class="navbar-left" href="#"><%= image_tag "logo.png" %></a>
+      <a class="navbar-brand navbar-left" href="#">An Awesome Blog</a>
+
+      <!-- This is the righthand side of the nav bar -->
+      <ul class="nav navbar-nav navbar-right">
+
+        <li><%= link_to "Home", index_path %></li>
+        <li><%= link_to "About Me", about_path %></li>
+
+        <!-- Create a dropdown button for all the user options -->
+        <li>
+          <div class="dropdown">
+          <span class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></span>
+            <ul class="dropdown-menu">
+              <li><%= link_to "See All Posts", posts_path %></li>
+              <li><%= link_to "Create New Post", new_post_path %></li>
+              <li><%= link_to "All Favorited Posts", favorites_path %></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Create a dropdown button for all the user options -->
+        <li>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm">Account</button>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <% if user_signed_in? %>
+                  <!-- Welcome back <%= current_user.first_name %> -->
+                  <%= link_to "Update Profile", user_path(current_user)%>
+                  <%= link_to "Logout", sessions_path, method: :delete, data: {confirm: "Are you sure you want to log out?"} %>
+                <% else %>
+                  <%= link_to "Login", new_session_path%>
+                  <%= link_to "Sign Up", new_user_path%>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div>
+    <% if notice %>
+      <div class="alert alert-success" role="alert">
+        <p><%= notice %></p>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert alert-danger" role="alert">
+        <p><%= alert %></p>
+      </div>
+    <% end %>
+  </div>
+  
+  <%= yield %>
+
+
+  </body>
 </html>
