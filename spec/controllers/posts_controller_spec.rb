@@ -6,8 +6,8 @@ RSpec.describe PostsController, type: :controller do
   let!(:user_1) {FactoryGirl.create(:user)}
   # use this to create valid posts. Since we did not define a user here, the
   # factory will just automatically generate one for us.
-  let(:valid_post) {FactoryGirl.create(:post, {user: user})}
-  let(:valid_post1) {FactoryGirl.create(:post)}
+  let!(:valid_post) {FactoryGirl.create(:post, {user: user})}
+  let!(:valid_post1) {FactoryGirl.create(:post)}
   let(:all_posts) {FactoryGirl.create_list(:post, 10, {user: user})}
   let(:all_posts_1) {FactoryGirl.create_list(:post, 10, {user: user_1})}
 
@@ -233,7 +233,9 @@ RSpec.describe PostsController, type: :controller do
       context "signed in user is not the owner of the post" do
         it "raises an error" do
           expect do
+            byebug
             patch :update, id: valid_post1.id
+            byebug
           end.to raise_error
         end
       end # End of context where signed in user is not the owner of the post

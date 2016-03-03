@@ -18,7 +18,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    favorite = current_user.faviorites.find(params[:id])
+    favorite = current_user.favorites.find(params[:id])
     post = Post.find(params[:post_id])
     favorite.destroy
     redirect_to post, notice: "Un-favorited!"

@@ -1,9 +1,11 @@
-<h1>All Favourited Questions</h1>
+<div class="main-page">
+  <h1>All Favourited Questions</h1>
 
-<table class="table table-striped">
-  <% @favorite.each do |favorite| %>
-    <tr>
-      <td><%= link_to favorite.title, post_path(favorite) %></td>
-    </tr>
-  <% end %>
-</table>
+  <table class="table table-striped">
+    <% @favorite.each do |favorite| %>
+      <tr>
+        <td><%= link_to favorite.title, post_path(favorite) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

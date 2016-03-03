@@ -30,6 +30,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'cancancan'
 
 gem "font-awesome-rails"
+
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

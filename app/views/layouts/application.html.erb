@@ -22,7 +22,7 @@
     }
 
     body {
-      margin-top: 50px;
+      margin-top: 70px;
     }
 
     .navbar-custom {
@@ -66,7 +66,13 @@
         <!-- Create a dropdown button for all the user options -->
         <li>
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm">Account</button>
+            <button type="button" class="btn btn-default btn-sm">
+              <% if user_signed_in? %>
+                Hi <%= current_user.first_name %>
+              <% else %>
+                Account
+              <% end %>
+            </button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
@@ -89,22 +95,7 @@
     </div>
   </nav>
 
-  <div>
-    <% if notice %>
-      <div class="alert alert-success" role="alert">
-        <p><%= notice %></p>
-      </div>
-    <% end %>
-
-    <% if alert %>
-      <div class="alert alert-danger" role="alert">
-        <p><%= alert %></p>
-      </div>
-    <% end %>
-  </div>
-  
   <%= yield %>
-
 
   </body>
 </html>

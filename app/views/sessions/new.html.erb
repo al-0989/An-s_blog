@@ -1,7 +1,18 @@
 <div class="main-page">
   <h1>Sign In</h1>
   <br>
-  <br>
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <p><%= notice %></p>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="alert alert-danger" role="alert">
+      <p><%= alert %></p>
+    </div>
+  <% end %>
+
   <%= form_tag sessions_path do %>
   <div>
     <%= label_tag :email %>

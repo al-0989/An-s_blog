@@ -24,7 +24,8 @@ class UsersController < ApplicationController
   def update
     # First find the user that you want to update
     @user = User.find(params[:id])
-    u_params = params.require(:user).permit(:first,:last_name,:email)
+    u_params = params.require(:user).permit(:first_name, :last_name, :email)
+
     if @user.update(u_params)
       redirect_to user_path(@user), notice: "User info successfully updated!"
     else
@@ -38,12 +39,10 @@ class UsersController < ApplicationController
     @user_posts = current_user.posts
 
     if @user == current_user
-      redirect_to user_path(@user)
+      render
     else
       redirect_to posts_path
     end
-
-    # This will return all the posts belonging to the current_user
   end
 
   def edit_password

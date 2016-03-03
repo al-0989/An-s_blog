@@ -2,13 +2,24 @@
   <h1>View all posts <%= @posts.count %></h1>
 
   <div>
-  <%= notice || alert%>
-  <%= form_tag(posts_path, method: "get") do %>
-    <%= label_tag ("Search for:") %>
-    <%= text_field_tag :search, params[:search], placeholder: "Keyword"%>
-    <%= submit_tag("Search") %>
-  <% end %>
+    <% if notice %>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <p><%= notice %></p>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <p><%= alert %></p>
+      </div>
+    <% end %>
+    <%= form_tag(posts_path, method: "get") do %>
+      <%= label_tag ("Search for:") %>
+      <%= text_field_tag :search, params[:search], placeholder: "Keyword"%>
+      <%= submit_tag("Search") %>
+    <% end %>
   </div>
+
   <br>
   <%# Use the following code to create links to each individual blog post %>
   <% @posts.each do |post| %>

@@ -14,11 +14,11 @@ class Ability
     #   can :create, Post
     # end
 
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
+    if user.admin?
+      can :manage, :all
+    else
+      can :read, :all
+    end
 
     # can :manage, Post, user_id: user.id
     can :manage, Post do |post|
