@@ -5,7 +5,7 @@ class CommentsMailer < ApplicationMailer
     # Since we have associations in place we are able to call this in order to return the post associated with the comment
     @post = comment.post
     #find the owner of the user via the post. We need this so that we can email the user.
-    @owner = post.user
+    @owner = @post.user
     mail(to: @owner.email, subject: "You got an answer!")
   end
 end

@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     @comment.post = @post
     @comment.user = current_user
     if @comment.save
-      CommentsMailer.notify_post_owner(@comment).deliver_later
+      CommentsMailer.notify_post_owner(@comment).deliver_now
       redirect_to post_path(@post), notice: "Comment successfully logged"
     else
       # this is actually a direct to the posts folder and looking for the show file
