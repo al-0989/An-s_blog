@@ -14,6 +14,9 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
 
   def authenticate_user
-    redirect_to new_session_path, notice: "Please sign in" unless user_signed_in?
+    respond_to do |format|
+      format.html { redirect_to new_session_path, notice: "Please sign in" unless user_signed_in? }
+      format.js { render js: "alert('Must be signed in to favorite a post!')" }
+    end
   end
 end

@@ -8,20 +8,29 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    post = Post.find(params[:post_id])
-    favorite = Favorite.new(post: post, user: current_user)
-    if favorite.save
-      redirect_to post, notice: "Favorited!"
-    else
-      redirect_to post, alert: "Favorite not completed try again!"
+    @post = Post.find(params[:post_id])
+    favorite = Favorite.new(post: @post, user: current_user)
+    respond_to do |format|
+      if favorite.save
+        format.html { redirect_to @post, notice: "Favorited!" }
+        # this will look for a favorited.js.erb file to render
+        format.js { render :favorited }
+      else
+        format.html { redirect_to @post, alert: "Favorite not completed try again!"}
+        # this will look for an unfavorited.js.erb file to render
+        format.js { render :unfavorited }
+      end
     end
   end
 
   def destroy
     favorite = current_user.favorites.find(params[:id])
-    post = Post.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     favorite.destroy
-    redirect_to post, notice: "Un-favorited!"
+    respond_to do |format|
+      format.html {redirect_to @post, notice: "Un-favorited"}
+      format.js { render }
+    end
   end
 
 end

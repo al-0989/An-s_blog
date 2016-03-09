@@ -1,0 +1,14 @@
+<% favourite = @post.favorite_for(current_user)  %>
+<% if favourite %>
+  <%= link_to fa_icon("thumbs-up"), post_favorite_path(@post, favourite),
+                                      method: :delete,
+                                      remote: true,
+                                      class:"like-fav-icon"  %>
+    <%# remote: true => it disables the rendering of a view it will just send the info via the format you tell it. See line format.js .... in the controller %>
+<% else %>
+  <%= link_to fa_icon("thumbs-o-up"), post_favorites_path(@post),
+                                      method: :post,
+                                      remote: true,
+                                      class:"like-fav-icon" %>
+<% end %>
+  (<%= @post.favorites.count %>)

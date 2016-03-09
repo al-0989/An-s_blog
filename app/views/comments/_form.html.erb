@@ -1,0 +1,9 @@
+<%= @comment.errors.full_messages.join(", ") %>
+<%# This creates the comment box %>
+<%= form_for [@post, @comment], remote: true do |f| %>
+  <div>
+    <%= f.label :comment %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit  %>
+<% end %>
