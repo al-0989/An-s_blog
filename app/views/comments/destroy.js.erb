@@ -1,0 +1,4 @@
+<%# Need to choose the comment that we are interested in deleting. Have it fadeout then eventually dissappear from the page %>
+$("#<%= dom_id(@comment) %>").fadeOut(1000, function() {
+  $(this).remove();
+});

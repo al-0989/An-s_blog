@@ -16,15 +16,19 @@ class CommentsController < ApplicationController
       else
         # this is actually a direct to the posts folder and looking for the show file
         # not actually a url posts_path
-        rneder "/posts/show"
+        format.html { render "/posts/show" }
+        format.js { render :comment_failed }
       end
     end
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    redirect_to root_path, alert: "ACCESS DENIED" unless can? :manage, comment
-    comment.destroy
-    redirect_to post_path(params[:post_id]), notice: "Comment was deleted."
+    @comment = Comment.find(params[:id])
+    redirect_to root_path, alert: "ACCESS DENIED" unless can? :manage, @comment
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to post_path(params[:post_id]), notice: "Comment was deleted."}
+      format.js { render :destroy }
+    end
   end
 end

@@ -22,7 +22,7 @@ class Ability
 
     # can :manage, Post, user_id: user.id
     can :manage, Post do |post|
-      # byebug
+      #byebug
       post.user == user
     end
 
