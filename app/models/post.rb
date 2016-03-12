@@ -2,6 +2,10 @@ class Post < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
+  # create a friendly id out of the title
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_user, through: :favorites, source: :user

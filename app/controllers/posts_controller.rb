@@ -68,6 +68,8 @@ class PostsController < ApplicationController
   def update
     # This action is what will happen when the form gets submitted after edits
     # have been made.
+    # This is to create the friendly ID
+    @post.slug = nil
     # First find the post that we want to update.
     # Then get the new params from the submit call and sanitize them.
     post_params = params.require(:post).permit(:title,:body,:category_id)
@@ -94,12 +96,12 @@ class PostsController < ApplicationController
   private
 
   def find_post
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
   end
 
   def authorize_user
     # can? is another built-in method that is provided to us by cancancan
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
     unless can? :manage, @post
       redirect_to root_path, alert: "ACCESS DENIED!"
     end
