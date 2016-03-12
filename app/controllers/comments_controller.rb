@@ -1,6 +1,12 @@
 class CommentsController < ApplicationController
 
-  before_action :authenticate_user
+  before_action :authenticate_user, except: [:index]
+
+  # create an index action for the jQuery client
+  def index
+    @post = Post.find(params[:post_id])
+    render json: @post.comments
+  end
 
   def create
     @post = Post.find(params[:post_id])

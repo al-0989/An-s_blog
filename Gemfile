@@ -32,6 +32,11 @@ gem 'cancancan'
 gem "font-awesome-rails"
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
+gem 'quiet_assets', group: :development # gem that suppresses the messages that come from the Rails assets pipeline
+gem 'rack-cors', :require => 'rack/cors'
+gem 'active_model_serializers'
+gem 'friendly_id'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

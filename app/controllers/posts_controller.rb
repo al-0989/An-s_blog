@@ -1,20 +1,9 @@
-# == Schema Information
-#
-# Table name: posts
-#
-#  id         :integer          not null, primary key
-#  title      :string
-#  body       :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  comment_id :integer
-#
-
 class PostsController < ApplicationController
 
   # load_and_authorize_resource
   # This would allow a first time vistor to browse the page but not to actually
   # create or edit a post unless they are logged in.
+  before_action :find_post, only: [:show, :edit, :update, :delete]
   before_action :authenticate_user, except: [:index, :show]
   before_action :authorize_user, only: [:edit, :update, :destroy]
 
@@ -28,6 +17,10 @@ class PostsController < ApplicationController
       @posts = Post.search(params[:search]).page(params[:page]).per(10)
     else
       @posts = Post.page(params[:page]).per(10)
+    end
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @posts}
     end
   end
 
@@ -60,21 +53,22 @@ class PostsController < ApplicationController
 
   def show
     # First find the post to show. Use the find method and pass in a post ID
-    @post = Post.find(params[:id])
     @comment = Comment.new
+    respond_to do |format|
+      format.html {render}
+      format.json {render json: @post}
+    end
   end
 
   def edit
     # First find the post that we want to edit
     # @post = current_user.post.find(:id)
-    @post = Post.find(params[:id])
   end
 
   def update
     # This action is what will happen when the form gets submitted after edits
     # have been made.
     # First find the post that we want to update.
-    @post = Post.find(params[:id])
     # Then get the new params from the submit call and sanitize them.
     post_params = params.require(:post).permit(:title,:body,:category_id)
     # Now update the post with those params.
@@ -90,7 +84,6 @@ class PostsController < ApplicationController
 
   def destroy
     # First find the post that we want to delete
-    @post = Post.find(params[:id])
     # Use destroy instead of delete since destory will also look at and remove
     # any associted values from the db
     @post.destroy
@@ -99,6 +92,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
 
   def authorize_user
     # can? is another built-in method that is provided to us by cancancan

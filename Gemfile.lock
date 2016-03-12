@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_model_serializers (0.9.4)
+      activemodel (>= 3.2)
     activejob (4.2.5.1)
       activesupport (= 4.2.5.1)
       globalid (>= 0.3.0)
@@ -76,6 +78,8 @@ GEM
     ffi (1.9.10)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hirb (0.7.3)
@@ -104,7 +108,10 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -203,6 +210,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   awesome_print
   bcrypt (~> 3.1.7)
   byebug
@@ -213,12 +221,15 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
+  friendly_id
   hirb
   interactive_editor
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
   pg (~> 0.15)
+  quiet_assets
+  rack-cors
   rails (= 4.2.5.1)
   rails-erd
   rspec-rails
