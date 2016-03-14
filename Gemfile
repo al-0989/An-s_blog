@@ -36,6 +36,7 @@ gem 'quiet_assets', group: :development # gem that suppresses the messages that 
 gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers'
 gem 'friendly_id'
+gem 'simple_form'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

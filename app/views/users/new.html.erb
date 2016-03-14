@@ -1,34 +1,45 @@
-<h1>Sign Up</h1>
-<hr>
-<%# Check to see if there are any errors. If so display them as a list %>
-<% if @user.errors.any?%>
-  <ul>
-    <% @user.errors.full_message.each do |msg| %>
-      <li><%= msg %></li>
-      <% end %>
-  </ul>
-<% end %>
+<div class="main-page">
+  <h1>Sign Up</h1>
+  <hr>
+  <%# Check to see if there are any errors. If so display them as a list %>
+  <% if @user.errors.any?%>
+    <ul>
+      <% @user.errors.full_message.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+  <% end %>
 
-<%= form_for @user do |f| %>
-  <div>
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
-  <div>
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <%= f.submit %>
-<% end %>
+  <!-- <%# form_for @user do |f| %>
+    <div>
+      <%# f.label :first_name %>
+      <%# f.text_field :first_name %>
+    </div>
+    <div>
+      <%# f.label :last_name %>
+      <%# f.text_field :last_name %>
+    </div>
+    <div>
+      <%# f.label :email %>
+      <%# f.email_field :email %>
+    </div>
+    <div>
+      <%# f.label :password %>
+      <%# f.password_field :password %>
+    </div>
+    <div>
+      <%# f.label :password_confirmation %>
+      <%# f.password_field :password_confirmation %>
+    </div>
+    <%# f.submit %>
+  <%# end %> -->
+
+  <%= simple_form_for @user do |f| %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.submit ({class: "btn btn-primary"}) %>
+  <% end %>
+</div>

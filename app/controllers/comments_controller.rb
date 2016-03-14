@@ -1,15 +1,14 @@
 class CommentsController < ApplicationController
 
+  before_action :find_post, except: [:destroy]
   before_action :authenticate_user, except: [:index]
 
   # create an index action for the jQuery client
   def index
-    @post = Post.find(params[:post_id])
     render json: @post.comments
   end
 
   def create
-    @post = Post.find(params[:post_id])
     comment_params = params.require(:comment).permit(:body)
     @comment = Comment.new comment_params
     @comment.post = @post
@@ -36,5 +35,11 @@ class CommentsController < ApplicationController
       format.html { redirect_to post_path(params[:post_id]), notice: "Comment was deleted."}
       format.js { render :destroy }
     end
+  end
+
+  private
+
+  def find_post
+    @post = Post.friendly.find(params[:post_id])
   end
 end

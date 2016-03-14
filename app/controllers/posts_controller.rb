@@ -101,7 +101,6 @@ class PostsController < ApplicationController
 
   def authorize_user
     # can? is another built-in method that is provided to us by cancancan
-    @post = Post.friendly.find(params[:id])
     unless can? :manage, @post
       redirect_to root_path, alert: "ACCESS DENIED!"
     end
