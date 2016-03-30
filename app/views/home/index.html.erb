@@ -1,0 +1,27 @@
+<!-- Jumbotron -->
+<div class="jumbotron text-center" style="margin-bottom: 0px">
+  <h1>Awesome Blog</h1>
+  <p>A truely awesome blog</p>
+  <form>
+    <label for="newsletter">Subscribe to get the latest updates:</label>
+    <input id="newsletter" name="newsletter" type="email" placeholder="Email Address" required>
+    <input type="submit" value="Subscribe">
+  </form>
+</div>
+<!-- End of Jumbotron -->
+<div>
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <p><%= notice %></p>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="alert alert-danger" role="alert">
+      <p><%= alert %></p>
+    </div>
+  <% end %>
+</div>
+<div class="main-page">
+  <h1>Latest Posts</h1>
+</div>

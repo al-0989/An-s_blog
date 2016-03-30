@@ -1,0 +1,11 @@
+<div id="<%= dom_id(comment) %>">
+  <%= comment.body %> Created by: <%= comment.user_full_name %>
+  on <%= comment.created_at.in_time_zone('Pacific Time (US & Canada)').strftime("%Y-%b-%d at %I:%M%p")%>
+  <% if can? :destory, comment%>
+    <%= link_to "Delete", post_comment_path(@post, comment),
+                          method: :delete,
+                          remote: true,
+                          data: {confirm: "Are you sure?"} %>
+  <% end %>
+  <hr>
+</div>

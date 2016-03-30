@@ -1,0 +1,5 @@
+$(".comments ul").prepend("<%= j render 'comment', comment: @comment  %>")
+
+<%# we need this to reset the @comment and the comment body %>
+<% @comment = Comment.new %>
+$("#comment_body").val("");

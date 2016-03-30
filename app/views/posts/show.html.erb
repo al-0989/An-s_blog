@@ -1,0 +1,46 @@
+<div class="main-page">
+  <h1><%= @post.title %></h1>
+  <hr>
+  <p><%= @post.body %></p>
+  <br>
+  <p> Category: <%= @post.category_name %></p>
+  <p> Created by: <%= @post.user_full_name if @post.user %></p>
+
+  <%# If the user has the authorization to edit show edit link %>
+  <% if can? :edit, @post %>
+    <%= link_to "Edit Post", edit_post_path(@post) %> |
+  <% end %>
+
+  <% if can? :destroy, @post %>
+    <%= link_to "Delete Post",
+               post_path(@post),
+               method: :delete,
+               data: {confirm: "Are you sure you want to delete #{@post.title}?"} %>
+  <% end %>
+
+  <hr>
+  <div id="post-fav">
+    <%# wrap the render in a div so that we can easily target it with an jquery %>
+    <%# if the request responds via html it will render the post-fav partial %>
+    <%= render "/favorites/post_fav" %>
+  </div>
+  <hr>
+
+  <h2>Like this post? Leave a comment!</h2>
+  <div id="comment-form">
+    <%= render "/comments/form" %>
+  </div>
+  <br>
+
+  <div class="comments">
+      <%# This creates the link to delete the comment. It will display the comments
+          in an unordered list%>
+      <ul>
+        <%# Cycle through the post comments %>
+        <% @post.comments.order("created_at DESC").each do |comment| %>
+        <%# here we render the comment by calling the partial. We need to pass the info to the partial however and that is done with the comment: comment. The render method is as follows render(partial, object/local)%>
+        <%= render "/comments/comment", comment: comment %>
+        <% end %>
+      </ul>
+    </div>
+  </div>

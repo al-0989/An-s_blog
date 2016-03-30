@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog Client</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="mustache.js"></script>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <h1>An Awesome Blog</h1>
+    <!-- Reminder that with mustache anything that is in the {{}} will be replaced with valid HTML that it will generate based on info passed from the the main.js -->
+    <script id="all-posts" type="x-tmpl-mustache">
+      <a href="javascript:void(0);" data-id="{{id}}">{{title}}</a>
+      <hr>
+    </script>
+
+    <script id="post-details" type="x-templ-mustache">
+      <h1>{{ title }}</h1>
+      <p>{{ body }}</p>
+      <a href="javascript:void(0);" id="back"> &lt;&lt; Back | </a>
+      <a href="javascript:void(0);" id="show-comments" data-p-id="{{id}}">Show Comments</a>
+      <br/>
+      <br/>
+      <div id="comments-container"></div>
+    </script>
+
+    <script id="comment" type="x-tmpl-mustache">
+      <p>{{ body }}</p>
+      <p>Created at: {{ creation_date }}</p>
+      <hr>
+    </script>
+
+    <div id="posts">Loading...</div>
+    <div id="post-show-container"></div>
+  </body>
+</html>

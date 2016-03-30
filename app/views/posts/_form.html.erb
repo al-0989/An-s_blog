@@ -1,0 +1,8 @@
+<%= simple_form_for @post do |f| %>
+  <%= f.input :title %>
+  <%= f.input :body %>
+  <%= f.collection_select :category, Category.all, :id, :name %>
+  <br>
+  <br>
+  <%= f.submit ({class: "btn btn-primary"}) %>
+<% end %>

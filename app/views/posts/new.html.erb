@@ -1,0 +1,19 @@
+<style>
+.title{
+  color: rgb(237, 122, 17);
+}
+</style>
+
+<div class="main-page">
+
+  <h1>Create a New Blog Post</h1>
+  <%= @post.errors.full_messages.join(", ") %>
+  <%# Much like with the link_to, the form_for is another method that is supplied to us
+      by rails. The @post here comes from the new post object created by the posts#new
+      action. Form_for takes in an ActiveRecord object as a first argument. Then it
+      looks at the object. If the object is not persisted (not yet saved to the
+      database). The form will automatically use POST for its 'method'. It
+      will automatically use 'questions_path' as its action (convention is that the
+      'questions_path' will submit to the 'create' action) %>
+  <%= render "form" %>
+</div>

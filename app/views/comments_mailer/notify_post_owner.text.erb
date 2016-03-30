@@ -1,0 +1,12 @@
+Hello <%= @owner.full_name %>,
+
+You've gotten a new comment to on your post:
+
+Post title: <%= @post.title %>
+The comment: <%= @comment.body %>
+
+Click <%= link_to "here", post_url(@post) %> to view your post.
+
+Regards,
+
+An Awesome Blog Team
